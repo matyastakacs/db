@@ -81,7 +81,8 @@ SELECT d.DEPARTMENT_id, d.DEPARTMENT_NAME, AVG(SALARY)
 ~~~~
 
 ## Labor 2
-__inner joint example__  
+__inner join example__ 
+Without inner join:
  ~~~~SQL
 SELECT
   e.employee_id,
@@ -92,4 +93,21 @@ FROM
   departments d
 WHERE
   e.department_id=d.department_id;
+~~~~
+With inner join:
+ ~~~~SQL
+SELECT
+  e.employee_id,
+  e.last_name,
+  d.department_name
+FROM
+  employees e
+INNER JOIN
+  departments d
+ON
+  e.department_id=d.department_id;
+~~~~
+__a__  
+ ~~~~SQL
+
 ~~~~
