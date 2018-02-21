@@ -81,8 +81,9 @@ SELECT d.DEPARTMENT_id, d.DEPARTMENT_NAME, AVG(SALARY)
 ~~~~
 
 ## Labor 2
-__inner join example__ 
-Without inner join:
+__inner join example1__ 
+
+ without inner join:
  ~~~~SQL
 SELECT
   e.employee_id,
@@ -107,7 +108,142 @@ INNER JOIN
 ON
   e.department_id=d.department_id;
 ~~~~
-__a__  
- ~~~~SQL
+__inner join example2__  
 
+with inner join:
+
+ ~~~~SQL
+ SELECT
+  e.employee_id,
+  e.last_name,
+  e.last_name, e.hire_date
+FROM
+  employees e
+INNER JOIN
+  job_history h
+ON
+  h.employee_id = 176
+  AND
+  h.start_date < e.hire_date
+  AND
+  e.hire_date < h.end_date;
+~~~~
+__outer join(left join)__  
+
+with inner join:
+
+ ~~~~SQL
+SELECT
+  employee_id,
+  last_name,
+  first_name
+FROM
+  employees
+LEFT OUTER JOIN
+  departments
+ON
+  employees.department_id=departments.department_id;
+~~~~
+
+__outer join(right join)__  
+
+with inner join:
+
+ ~~~~SQL
+SELECT
+  employee_id,
+  last_name,
+  first_name
+FROM
+  employees
+RIGHT JOIN
+  departments
+ON
+  employees.department_id=departments.department_id;
+~~~~
+
+__outer join(full)__  
+
+with inner join:
+
+ ~~~~SQL
+SELECT
+  employee_id,
+  last_name,
+  first_name
+FROM
+  employees
+FULL OUTER JOIN
+  departments
+ON
+  employees.department_id=departments.department_id;
+~~~~
+
+__cross join__  
+
+ ~~~~SQL
+SELECT
+  first_name
+  department_name
+FROM
+  employees
+CROSS JOIN
+  departments;
+~~~~
+
+__where vs. having__  
+
+where:
+ ~~~~SQL
+SELECT
+  d.department_id,
+  d.department_name,
+  AVG(salary) AS "avg"
+FROM
+  employees e
+INNER JOIN
+  departments d
+ON
+  e.department_id = d.department_id
+GROUP BY
+  d.department_name,
+  d.department_id
+HAVING
+  AVG(salary) > 9000;
+~~~~
+
+having:
+ ~~~~SQL
+SELECT
+  d.department_id,
+  d.department_name,
+  AVG(salary) AS "avg"
+FROM
+  employees e
+INNER JOIN
+  departments d
+ON
+  e.department_id = d.department_id
+WHERE
+  salary > 9000
+GROUP BY
+  d.department_name,
+  d.department_id;
+~~~~
+
+__having__  
+
+ ~~~~SQL
+SELECT
+  COUNT(employee_id),
+  department_id,
+  salary
+FROM
+  employees
+GROUP BY department_id, salary
+HAVING(
+  COUNT(employee_id) > 1
+  OR salary < 100000
+)
+ORDER BY department_id, salary desc;
 ~~~~
