@@ -3,26 +3,26 @@
 ## Labor 1
 
 __select sum of a column from employee table__  
- ~~~~sql
+ ~~~~SQL
 SELECT SUM(SALARY) FROM EMPLOYEES
 ~~~~
 __NVL ->  replace null values with zero__  
- ~~~~sql
+ ~~~~SQL
 SELECT AVG(NVL(SALARY,0)) avg_salary from EMPLOYEES
 ~~~~
 
 __Get the number  of rows__
- ~~~~sql
+ ~~~~SQL
 SELECT COUNT(*) FROM EMPLOYEES
 ~~~~
 
 __Get the number elements in a col__  
- ~~~~sql
+ ~~~~SQL
 SELECT COUNT(COL_name) FROM EMPLOYEES
 ~~~~
 
 __example for filtering by date__  
- ~~~~sql
+ ~~~~SQL
 SELECT COUNT(*), COUNT(MANAGER_id)
   FROM EMPLOYEES
   WHERE HIRE_DATE > TRUNC(SYSDATE);
@@ -33,11 +33,11 @@ SELECT COUNT(*), COUNT(MANAGER_id)
 ~~~~
 
 __DISTINCT -> Get only the unique value__  
- ~~~~sql
+ ~~~~SQL
 SELECT COUNT (DISTINCT MANAGER_id) NUM_DISTINCT_MANAGERS FROM EMPLOYEES
 ~~~~
 __Query min/max values and giving them a name__
-~~~~sql
+~~~~SQL
 SELECT 
   MAX(SALARY) as minimum,
   MIN(SALARY) as maximum
@@ -45,7 +45,7 @@ FROM EMPLOYEES
 ~~~~
 
 __Query employee ID-s grouping them and ordering them by department id__
-~~~~sql
+~~~~SQL
 SELECT COUNT(EMPLOYEE_ID), DEPARTMENT_ID
  FROM EMPLOYEES
  GROUP BY DEPARTMENT_ID
@@ -53,7 +53,7 @@ SELECT COUNT(EMPLOYEE_ID), DEPARTMENT_ID
  ~~~~
  
  __Group by deparment id, order by hire_id__
- ~~~~sql
+ ~~~~SQL
  SELECT COUNT(EMPLOYEE_ID), DEPARTMENT_ID, HIRE_DATE
   FROM EMPLOYEES
   GROUP BY DEPARTMENT_ID, HIRE_DATE 
@@ -78,4 +78,18 @@ SELECT d.DEPARTMENT_id, d.DEPARTMENT_NAME, AVG(SALARY)
   INNER JOIN DEPARTMENTS D
   ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
   GROUP BY D.DEPARTMENT_NAME, D.DEPARTMENT_ID
+~~~~
+
+## Labor 2
+__inner joint example__  
+ ~~~~SQL
+SELECT
+  e.employee_id,
+  e.last_name,
+  d.department_name
+FROM
+  employees e,
+  departments d
+WHERE
+  e.department_id=d.department_id;
 ~~~~
